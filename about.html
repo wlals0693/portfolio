@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio | About Me</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html">Portfolio</a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="index.html">HOME</a>
+        <a href="personal_project.html">Personal Project</a>
+        <a href="team_project.html">Team Project</a>
+        <a class="active" href="about.html">About Me</a>
+      </nav>
+    </header>
+
+    <main class="page about-page">
+      <section class="page-title reveal">
+        <h1>About Me</h1>
+        <p>웹프로그래밍을 배우며 개인 프로젝트와 팀 프로젝트를 통해 성장하고 있습니다.</p>
+      </section>
+
+      <section class="about-card about-combined-card reveal">
+        <div class="about-section">
+          <h2 class="section-title">자기소개</h2>
+
+          <div class="profile-list">
+            <div class="profile-item reveal-item">
+              <div class="profile-icon" aria-label="이름 아이콘">
+                <img class="icon-image" src="media/me.png" alt="이름 아이콘" />
+                <span class="icon-fallback">N</span>
+              </div>
+              <div>
+                <h3>이름</h3>
+                <p>박지민</p>
+              </div>
+            </div>
+
+            <div class="profile-item reveal-item">
+              <div class="profile-icon" aria-label="이메일 아이콘">
+                <img class="icon-image" src="media/mail.png" alt="이메일 아이콘" />
+                <span class="icon-fallback">E</span>
+              </div>
+              <div>
+                <h3>이메일</h3>
+                <p>example@email.com</p>
+              </div>
+            </div>
+
+            <div class="profile-item reveal-item">
+              <a class="profile-icon" href="https://github.com/wlals0693" target="_blank" rel="noopener noreferrer" aria-label="GitHub 링크">
+                <img class="icon-image" src="media/git.png" alt="GitHub 아이콘" />
+                <span class="icon-fallback">G</span>
+              </a>
+              <div>
+                <h3>GitHub</h3>
+                <p>github.com/wlals0693</p>
+              </div>
+            </div>
+
+            <div class="profile-item reveal-item">
+              <a class="profile-icon" href="https://jimin0703.tistory.com/" target="_blank" rel="noopener noreferrer" aria-label="Blog 링크">
+                <img class="icon-image" src="media/blog.webp" alt="Blog 아이콘" />
+                <span class="icon-fallback">B</span>
+              </a>
+              <div>
+                <h3>Blog</h3>
+                <p>jimin0703.tistory.com</p>
+              </div>
+            </div>
+
+            <div class="profile-item profile-item-full reveal-item">
+              <div>
+                <h3>스펙</h3>
+                <ul class="profile-details">
+                  <li>네트워크 관리사 2급</li>
+                  <li>멋쟁이사자처럼 14기</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-section">
+          <h2 class="section-title">관심 기술</h2>
+          <div class="tech-list">
+            <a class="tech-item reveal-item" href="https://react.dev/" target="_blank" rel="noopener noreferrer" aria-label="React 공식 사이트 새 창으로 열기" title="React 공식 사이트">
+              <div class="tech-icon-wrap">
+                <div class="tech-icon">
+                  <img class="icon-image" src="media/react.webp" alt="React 아이콘" />
+                  <span class="icon-fallback">React</span>
+                </div>
+                <span>React</span>
+              </div>
+              <p>컴포넌트 단위로 화면을 구성하고 효율적으로 프론트엔드를 개발할 수 있는 라이브러리입니다.</p>
+            </a>
+
+            <a class="tech-item reveal-item" href="https://developer.mozilla.org/ko/docs/Web/JavaScript" target="_blank" rel="noopener noreferrer" aria-label="JavaScript 문서 새 창으로 열기" title="JavaScript 문서">
+              <div class="tech-icon-wrap">
+                <div class="tech-icon">
+                  <img class="icon-image" src="media/js.webp" alt="JavaScript 아이콘" />
+                  <span class="icon-fallback">JS</span>
+                </div>
+                <span>JavaScript</span>
+              </div>
+              <p>웹페이지에서 버튼 클릭, 입력 처리, 화면 전환 같은 동적인 기능을 구현하는 언어입니다.</p>
+            </a>
+
+            <a class="tech-item reveal-item" href="https://www.java.com/ko/" target="_blank" rel="noopener noreferrer" aria-label="Java 공식 사이트 새 창으로 열기" title="Java 공식 사이트">
+              <div class="tech-icon-wrap">
+                <div class="tech-icon">
+                  <img class="icon-image" src="media/java.webp" alt="Java 아이콘" />
+                  <span class="icon-fallback">Java</span>
+                </div>
+                <span>Java</span>
+              </div>
+              <p>객체지향 구조를 바탕으로 안정적이고 유지보수하기 쉬운 프로그램을 만들 수 있는 언어입니다.</p>
+            </a>
+
+            <a class="tech-item reveal-item" href="https://spring.io/" target="_blank" rel="noopener noreferrer" aria-label="Spring 공식 사이트 새 창으로 열기" title="Spring 공식 사이트">
+              <div class="tech-icon-wrap">
+                <div class="tech-icon">
+                  <img class="icon-image" src="media/spring.webp" alt="Spring 아이콘" />
+                  <span class="icon-fallback">Spring</span>
+                </div>
+                <span>Spring</span>
+              </div>
+              <p>Java 기반으로 서버, API, 데이터베이스 연동 기능을 체계적으로 개발하도록 돕는 프레임워크입니다.</p>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact-section reveal" aria-labelledby="contact-title">
+        <div class="contact-heading">
+          <h2 id="contact-title">메시지 남기기</h2>
+          <p>작성 중인 내용은 브라우저에 임시 저장됩니다.</p>
+        </div>
+        <form class="contact-form" data-contact-form novalidate>
+          <label>
+            이름
+            <input type="text" name="name" autocomplete="name" />
+          </label>
+          <label>
+            이메일
+            <input type="email" name="email" autocomplete="email" />
+          </label>
+          <label>
+            메시지
+            <textarea name="message" rows="6" maxlength="500"></textarea>
+          </label>
+          <div class="contact-form-footer">
+            <span data-message-count>0 / 500</span>
+            <button class="home-button primary" type="submit">제출하기</button>
+          </div>
+          <p class="form-message" data-form-message aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>
+        2026 웹프로그래밍 <span>|</span> 박지민<span>|</span>
+        <a href="https://github.com/wlals0693" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <span>|</span>
+        <a href="https://jimin0703.tistory.com/" target="_blank" rel="noopener noreferrer">Blog</a>
+      </p>
+    </footer>
+    <script src="main.js"></script>
+  </body>
+</html>

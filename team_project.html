@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio | Team Project</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html">Portfolio</a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="index.html">HOME</a>
+        <a href="personal_project.html">Personal Project</a>
+        <a class="active" href="team_project.html">Team Project</a>
+        <a href="about.html">About Me</a>
+      </nav>
+    </header>
+
+    <main class="page team-page">
+      <section class="intro team-intro reveal">
+        <h1>Team Project</h1>
+        <p class="lead">사이버 보안 교육 사이트의 시연 영상, 주요 콘텐츠 구성, 팀원 역할을 정리했습니다.</p>
+      </section>
+
+      <section class="team-showcase reveal" aria-label="Team project overview">
+        <article class="team-feature-card reveal-item">
+          <div class="team-video-box">
+            <iframe
+              src="https://www.youtube.com/embed/4m1xxSp8eco"
+              title="팀 프로젝트 시연 영상"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <div class="team-site-action compact">
+            <a class="team-site-button" href="https://youtu.be/4m1xxSp8eco" target="_blank" rel="noopener noreferrer">YouTube에서 시연 영상 보기</a>
+          </div>
+        </article>
+      </section>
+
+      <section class="team-content-section reveal" aria-labelledby="team-content-title">
+        <div class="team-section-heading">
+          <h2 id="team-content-title">주요 콘텐츠 구성</h2>
+        </div>
+        <div class="team-tab-grid" role="tablist" aria-label="팀 프로젝트 콘텐츠">
+          <button class="team-tab-card active" type="button" data-team-tab="main">메인 홈</button>
+          <button class="team-tab-card" type="button" data-team-tab="issue">보안 이슈</button>
+          <button class="team-tab-card" type="button" data-team-tab="owasp">OWASP Top 10</button>
+          <button class="team-tab-card" type="button" data-team-tab="rules">보안 수칙</button>
+          <button class="team-tab-card" type="button" data-team-tab="risk">위험 진단</button>
+        </div>
+        <article class="team-content-panel" data-team-panel aria-live="polite"></article>
+      </section>
+
+      <section class="team-members reveal" aria-label="Team members">
+        <div class="team-section-heading">
+          <h2>팀 구성 및 역할</h2>
+        </div>
+
+        <div class="member-grid" data-member-list></div>
+
+        <div class="team-site-action">
+          <a class="team-site-button" href="https://wep-midterm.vercel.app/" target="_blank" rel="noopener noreferrer">팀 프로젝트 사이트 이동</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>
+        2026 웹프로그래밍 <span>|</span> 박지민<span>|</span>
+        <a href="https://github.com/wlals0693" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <span>|</span>
+        <a href="https://jimin0703.tistory.com/" target="_blank" rel="noopener noreferrer">Blog</a>
+      </p>
+    </footer>
+    <script src="main.js"></script>
+  </body>
+</html>

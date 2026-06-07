@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio | Personal Project</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html">Portfolio</a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="index.html">HOME</a>
+        <a class="active" href="personal_project.html">Personal Project</a>
+        <a href="team_project.html">Team Project</a>
+        <a href="about.html">About Me</a>
+      </nav>
+    </header>
+
+    <main class="page project-page">
+      <section class="intro project-intro reveal">
+        <h1>Personal Project</h1>
+        <p class="lead">과제와 개인 프로젝트를 정리했습니다. 필터를 누르면 조건에 맞는 프로젝트만 표시됩니다.</p>
+      </section>
+
+      <section class="project-filter reveal" aria-label="프로젝트 태그 필터">
+        <button class="filter-button active" type="button" data-project-filter="all">전체</button>
+        <button class="filter-button" type="button" data-project-filter="web">웹 프로젝트</button>
+        <button class="filter-button" type="button" data-project-filter="program">프로그램</button>
+        <button class="filter-button" type="button" data-project-filter="done">완료</button>
+        <button class="filter-button" type="button" data-project-filter="progress">진행 중</button>
+      </section>
+
+      <section class="project-grid" aria-label="Personal project list" data-project-list></section>
+    </main>
+
+    <footer class="site-footer">
+      <p>
+        2026 웹프로그래밍 <span>|</span> 박지민<span>|</span>
+        <a href="https://github.com/wlals0693" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <span>|</span>
+        <a href="https://jimin0703.tistory.com/" target="_blank" rel="noopener noreferrer">Blog</a>
+      </p>
+    </footer>
+
+    <dialog class="project-dialog" aria-label="프로젝트 상세 보기">
+      <div class="project-dialog-panel">
+        <button class="modal-close" type="button" aria-label="닫기">닫기</button>
+        <div class="project-dialog-content" data-project-modal></div>
+      </div>
+    </dialog>
+
+    <script src="main.js"></script>
+  </body>
+</html>
