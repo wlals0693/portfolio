@@ -1,6 +1,8 @@
 const STORAGE_KEYS = {
   theme: 'portfolio-theme',
   contactDraft: 'portfolio-contact-draft',
+  visitCount: 'portfolioVisitCount',
+  contactMessages: 'portfolio-contact-messages',
 };
 
 const projects = [
@@ -47,6 +49,8 @@ const projects = [
     learned: '데이터를 분리해 관리하면 문제 추가와 수정이 쉬워지고 프로그램 구조가 단순해진다는 점을 경험했습니다.',
     deployUrl: '',
     githubUrl: 'https://github.com/wlals0693/CBT',
+    youtubeUrl: 'https://youtu.be/TdLxEX8uL8k',
+    youtubeEmbed: 'https://www.youtube.com/embed/TdLxEX8uL8k',
   },
   {
     id: 'f1',
@@ -61,6 +65,8 @@ const projects = [
     learned: '낯선 주제일수록 정보 구조와 시각적 구분이 중요하다는 점을 배웠습니다.',
     deployUrl: '',
     githubUrl: 'https://github.com/wlals0693/f1master',
+    youtubeUrl: 'https://youtu.be/5FsOk-uDQDo',
+    youtubeEmbed: 'https://www.youtube.com/embed/5FsOk-uDQDo',
   },
   {
     id: 'idea-lion',
@@ -76,6 +82,8 @@ const projects = [
     learned: '사용자에게 필요한 판단 기준을 화면 안에서 단계적으로 제시하는 방식의 중요성을 배웠습니다.',
     deployUrl: 'https://idea-lion-front.vercel.app/',
     githubUrl: '',
+    youtubeUrl: 'https://youtu.be/F_8dl2-wvQQ',
+    youtubeEmbed: 'https://www.youtube.com/embed/F_8dl2-wvQQ',
   },
 ];
 
@@ -131,7 +139,7 @@ const teamMembers = [
     tasks: ['취약 코드와 보안 조치 코드 비교 구현', 'OWASP A05 XSS 및 A01 접근 통제 실습 구현', 'OWASP A07 무차별 대입 실습 구현'],
   },
   {
-    name: '박시원',
+    name: '박시우',
     role: '팀원',
     photo: 'media/sw.jpg',
     title: '보안 수칙 페이지 JS 인터랙션 제작',
@@ -145,7 +153,7 @@ const teamMembers = [
     tasks: ['보안 기사 실시간 반영 및 필터 구현', '보안 트렌드 영상 실시간 반영 및 필터 구현', '더보기 버튼 클릭 시 추가 정보 표시 구현'],
   },
   {
-    name: '최보영',
+    name: '최보원',
     role: '팀원',
     photo: 'media/bw.jpg',
     title: '위험진단 페이지 제작 및 메인 JS 제작',
@@ -190,6 +198,29 @@ function initThemeToggle() {
   syncButton();
 }
 
+function initVisitMessage() {
+  const message = document.querySelector('#visitMessage');
+  if (!message) return;
+
+  try {
+    const savedCount = Number.parseInt(
+      localStorage.getItem(STORAGE_KEYS.visitCount) || '0',
+      10,
+    );
+    const currentCount =
+      Number.isFinite(savedCount) && savedCount > 0 ? savedCount : 0;
+    const nextCount = currentCount + 1;
+
+    localStorage.setItem(STORAGE_KEYS.visitCount, String(nextCount));
+    message.textContent =
+      nextCount === 1
+        ? '처음 방문해주셨네요. 반갑습니다.'
+        : `다시 방문해주셨네요. 이번이 ${nextCount}번째 방문입니다.`;
+  } catch (error) {
+    message.textContent = '';
+  }
+}
+
 function initRevealAnimations() {
   const items = document.querySelectorAll('.reveal, .reveal-item');
   if (!items.length) return;
@@ -220,8 +251,20 @@ function initRevealAnimations() {
 function renderProjectMedia(project) {
   const fallback = `<span class="media-placeholder">${escapeHtml(project.placeholder || project.title)}</span>`;
 
-  if (project.video) {
-    return `<video src="${escapeHtml(project.video)}" muted playsinline preload="metadata"></video>${fallback}`;
+  if (project.youtubeEmbed) {
+    const videoId = project.youtubeEmbed.split('/').pop();
+    return `
+      <button
+        class="project-media-button"
+        type="button"
+        data-project-video="${escapeHtml(project.id)}"
+        aria-label="${escapeHtml(project.title)} 시연 영상 재생"
+      >
+        <img src="https://img.youtube.com/vi/${escapeHtml(videoId)}/hqdefault.jpg" alt="${escapeHtml(project.title)} 시연 영상 썸네일" onerror="this.remove()" />
+        ${fallback}
+        <span class="project-play-badge" aria-hidden="true">▶</span>
+      </button>
+    `;
   }
 
   if (project.image) {
@@ -273,9 +316,9 @@ function initProjectFilters() {
   });
 }
 
-function createDetailBox(title, content) {
+function createDetailBox(title, content, extraClass = '') {
   return `
-    <section class="project-detail-box">
+    <section class="project-detail-box ${extraClass}">
       <h3>${escapeHtml(title)}</h3>
       ${content}
     </section>
@@ -296,9 +339,6 @@ function openProjectModal(projectId) {
   const githubButton = project.githubUrl
     ? `<a class="project-button" href="${escapeHtml(project.githubUrl)}" target="_blank" rel="noopener noreferrer">GitHub 링크</a>`
     : '';
-  const video = project.video
-    ? `<video class="project-dialog-player" src="${escapeHtml(project.video)}" controls playsinline></video>`
-    : '';
 
   content.innerHTML = `
     <header>
@@ -315,10 +355,35 @@ function openProjectModal(projectId) {
       ${createDetailBox('배운 점 또는 특징', `<p>${escapeHtml(project.learned)}</p>`)}
       ${createDetailBox('링크', `<div class="project-dialog-actions">${deployButton}${githubButton}${!deployButton && !githubButton ? '<p>공개 링크가 없습니다.</p>' : ''}</div>`)}
     </div>
-    ${video ? createDetailBox('시연 영상', video) : ''}
   `;
 
   dialog.showModal();
+}
+
+function initProjectVideoCards() {
+  const buttons = document.querySelectorAll('[data-project-video]');
+  if (!buttons.length) return;
+
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const project = projects.find((item) => item.id === button.dataset.projectVideo);
+      if (!project?.youtubeEmbed) return;
+
+      const media = button.closest('.project-media');
+      if (!media) return;
+
+      media.innerHTML = `
+        <div class="project-card-video video-embed">
+          <iframe
+            src="${escapeHtml(project.youtubeEmbed)}?autoplay=1"
+            title="${escapeHtml(project.title)} 시연 영상"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+        </div>
+      `;
+    });
+  });
 }
 
 function initProjectModal() {
@@ -334,9 +399,8 @@ function initProjectModal() {
     if (event.target === dialog) dialog.close();
   });
   dialog.addEventListener('close', () => {
-    dialog.querySelectorAll('video').forEach((video) => {
-      video.pause();
-      video.currentTime = 0;
+    dialog.querySelectorAll('iframe').forEach((iframe) => {
+      iframe.src = iframe.src;
     });
   });
 }
@@ -366,6 +430,63 @@ async function initBlogPosts() {
     initRevealAnimations();
   } catch (error) {
     list.innerHTML = '<p class="blog-status">티스토리 블로그 글을 불러오지 못했습니다.</p>';
+  }
+}
+
+function getSavedContactMessages() {
+  try {
+    const messages = JSON.parse(
+      localStorage.getItem(STORAGE_KEYS.contactMessages) || '[]',
+    );
+    return Array.isArray(messages) ? messages : [];
+  } catch (error) {
+    return [];
+  }
+}
+
+function renderSavedMessages() {
+  const section = document.querySelector('[data-saved-messages]');
+  const list = document.querySelector('[data-saved-message-list]');
+  if (!section || !list) return;
+
+  const messages = getSavedContactMessages();
+  section.classList.toggle('is-empty', messages.length === 0);
+
+  if (!messages.length) {
+    list.innerHTML = '<p class="saved-message-empty">아직 남긴 메시지가 없습니다.</p>';
+    return;
+  }
+
+  list.innerHTML = messages
+    .slice()
+    .reverse()
+    .map(
+      (item) => `
+        <article class="saved-message-card">
+          <div>
+            <strong>${escapeHtml(item.name)}</strong>
+            <span>${escapeHtml(item.email)}</span>
+          </div>
+          <p>${escapeHtml(item.message)}</p>
+        </article>
+      `,
+    )
+    .join('');
+}
+
+function saveContactMessage(name, email, text) {
+  try {
+    const messages = getSavedContactMessages();
+    messages.push({
+      name,
+      email,
+      message: text,
+      createdAt: new Date().toISOString(),
+    });
+    localStorage.setItem(STORAGE_KEYS.contactMessages, JSON.stringify(messages));
+    renderSavedMessages();
+  } catch (error) {
+    // 제출 성공 흐름은 유지하되, 저장 실패가 다른 기능을 막지 않게 둡니다.
   }
 }
 
@@ -425,6 +546,11 @@ function initContactForm() {
       return;
     }
 
+    saveContactMessage(
+      nameInput.value.trim(),
+      emailInput.value.trim(),
+      messageInput.value.trim(),
+    );
     localStorage.removeItem(STORAGE_KEYS.contactDraft);
     form.reset();
     updateCount();
@@ -499,10 +625,13 @@ function initMemberFlipCards() {
 document.addEventListener('DOMContentLoaded', () => {
   try {
     initThemeToggle();
+    initVisitMessage();
     renderProjectCards();
     initProjectFilters();
+    initProjectVideoCards();
     initProjectModal();
     initBlogPosts();
+    renderSavedMessages();
     initContactForm();
     initTeamContentTabs();
     initMemberFlipCards();
